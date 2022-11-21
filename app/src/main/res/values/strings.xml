@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">Admin</string>
+    <string name="upload_question">Upload Question</string>
+    <string name="department">Department</string>
+    <string name="cse_111">CSE-111</string>
+    <string name="course_code">Course Code</string>
+    <string name="spring">Spring</string>
+    <string name="summer">Summer</string>
+    <string name="fall">Fall</string>
+    <string name="semester">Semester</string>
+    <string name="year">Year</string>
+    <string name="pdf_file">PDF File</string>
+    <string name="select_pdf">Select PDF</string>
+    <string name="upload">Upload</string>
+    <string name="exam">Exam</string>
+
+    <string-array name="department_name">
+        <item>Architecture</item>
+        <item>Business Administration</item>
+        <item>Business Studies</item>
+        <item>Civil Engineering</item>
+        <item>Computing and Information System</item>
+        <item>Computer Science and Engineering</item>
+        <item>Development Studies</item>
+        <item>Electrical and Electronic Engineering</item>
+        <item>Electronics and Telecommunication Engineering</item>
+        <item>English</item>
+        <item>Environmental Science and Disaster Management</item>
+        <item>General Educational Development</item>
+        <item>Information Science and Library Management</item>
+        <item>Information Technology and Management</item>
+        <item>Innovation and Entrepreneurship</item>
+        <item>Journalism and Mass Communication</item>
+        <item>Law</item>
+        <item>Multimedia and Creative Technology</item>
+        <item>Nutrition and Food Engineering</item>
+        <item>Pharmacy</item>
+        <item>Public Health</item>
+        <item>Real Estate</item>
+        <item>Software Engineering</item>
+        <item>Textile Engineering</item>
+        <item>Tourism and Hospitality Management</item>
+    </string-array>
+
+    <string-array name="exam_name">
+        <item>Midterm</item>
+        <item>Final</item>
+    </string-array>
+
+    <string name="courses">Courses</string>
+    <string name="ok">Ok</string>
+    <string name="nothing_n_found">Nothing \n Found</string>
+    <string name="ops">Ops!</string>
+    <string name="help">Help</string>
+    <string name="email">Email</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+    <string name="password">Password</string>
+    <string name="or">or</string>
+    <string name="sign_up">Sign up</string>
+    <string name="question">Question</string>
+    <string name="notice">Notice</string>
+    <string name="approved">Approved</string>
+    <string name="rejected">Rejected</string>
+    <string name="reset">Reset</string>
+    <string name="reset_npassword">Reset \nPassword</string>
+    <string name="log_in">Log in</string>
+    <string name="app_intro">All the exam questions of Daffodil International University will be found here.</string>
+    <string name="diu_question_bank">DIU question bank</string>
+    <string name="department_of">Department of</string>
+    <string name="title">Title</string>
+    <string name="link">Link</string>
+    <string name="verify">Verify</string>
+    <string name="reset_pass">Reset Pass</string>
+    <string name="send_message">Send Message</string>
+
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="name">Name</string>
+    <string name="subject">Subject</string>
+    <string name="create_n_account">Create \nAccount</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="reward">Reward</string>
+    <string name="watch_video_button_text">Ads</string>
+    <string name="forgotten_password">Forgotten password?</string>
+    <string name="by_signing_up_you_agree_to_our">By signing up, you agree to our</string>
+    <string name="terms_privacy_policy"><![CDATA[Terms & Privacy Policy]]></string>
+    <string name="welcome_back">Welcome \nBack</string>
+    <string name="change_password">Change password</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="change">Change</string>
+    <string name="uploads">Uploads</string>
+    <string name="not_available">Not available&#8230;</string>
+    <string name="see_more">See more&#8230;</string>
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable-v24/background_login_signup_color.xml" value="0.1" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable-v24/background_login_signup_color_white.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable-v24/background_preview.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable-v24/background_upload_layout_dark.xml" value="0.1935" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable-v24/ic_done.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable-v24/ic_lock.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable/ic_close.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable/ic_done.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/drawable/ic_pdf.xml" value="0.208" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout-v23/activity_pdf_viewer.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout-v23/item_container_upload.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_approve_question.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_approve_view.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_courses.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_department.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_help.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_login.xml" value="0.34782608695652173" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_manage_user.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_notice.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_pdf_viewer.xml" value="0.33" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_privacy_policy.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_profile.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_question_upload.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_reset_password.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_signup.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_users.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/activity_welcome.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/item_container_approve.xml" value="0.3569230769230769" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/item_container_courses.xml" value="0.3569230769230769" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/item_container_help.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/item_container_notification.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/item_container_user.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/itme_container_pdf.xml" value="0.3625" />
+        <entry key="..\:/Users/Afridi/AndroidStudioProjects/DIUQuestionBnakAdmin/app/src/main/res/layout/progress.xml" value="0.3625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
