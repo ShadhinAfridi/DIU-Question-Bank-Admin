@@ -1,32 +1,30 @@
 package com.fourdevs.diuquestionbnakadmin.adapter;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.fourdevs.diuquestionbnakadmin.R;
 import com.fourdevs.diuquestionbnakadmin.databinding.ItemContainerUploadBinding;
 import com.fourdevs.diuquestionbnakadmin.listeners.CourseListener;
 import com.fourdevs.diuquestionbnakadmin.models.Course;
 
-import java.util.List;
+public class UpdateAdapter extends ListAdapter<Course,UpdateAdapter.CourseViewHolder> {
 
-public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.CourseViewHolder>{
+    private final CourseListener courseListener;
 
-    private final List<Course> coursers;
-    private CourseListener courseListener;
-
-    public UpdateAdapter(List<Course> departments, CourseListener courseListener) {
-        this.coursers = departments;
+    public UpdateAdapter(@NonNull DiffUtil.ItemCallback<Course> diffCallback,
+                         CourseListener courseListener) {
+        super(diffCallback);
         this.courseListener = courseListener;
     }
 
     @NonNull
     @Override
-    public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UpdateAdapter.CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemContainerUploadBinding itemContainerUploadBinding = ItemContainerUploadBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
@@ -36,13 +34,9 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.CourseView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        holder.setCourseData(coursers.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return coursers.size();
+    public void onBindViewHolder(@NonNull UpdateAdapter.CourseViewHolder holder, int position) {
+        Course current = getItem(position);
+        holder.setCourseData(current.getCourse());
     }
 
     static class CourseViewHolder extends RecyclerView.ViewHolder{
@@ -59,16 +53,23 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.CourseView
             binding.department.setText(course.departmentName);
             binding.semesterName.setText(course.semester +" "+course.year);
             if(course.approved != null) {
-                if(!course.approved) {
-                    binding.status.setText("Pending");
-                    binding.status.setTextColor(R.color.primary);
+                if(course.approved) {
+                    binding.statusApproved.setVisibility(View.VISIBLE);
+                    binding.statusPending.setVisibility(View.INVISIBLE);
+                } else {
+                    binding.statusPending.setVisibility(View.VISIBLE);
+                    binding.statusApproved.setVisibility(View.INVISIBLE);
                 }
+                binding.statusRejected.setVisibility(View.INVISIBLE);
             } else {
-                binding.status.setText("Rejected");
-                binding.status.setTextColor(Color.RED);
+                binding.statusApproved.setVisibility(View.INVISIBLE);
+                binding.statusPending.setVisibility(View.INVISIBLE);
+                binding.statusRejected.setVisibility(View.VISIBLE);
             }
+            binding.uploadDate.setText(course.dateTime);
 
         }
     }
 
 }
+

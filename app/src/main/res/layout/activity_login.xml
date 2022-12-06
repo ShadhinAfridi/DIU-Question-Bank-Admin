@@ -104,14 +104,7 @@
                 app:layout_constraintEnd_toStartOf="@id/imageEmailCheck"
                 android:hint="@string/email"
                 android:textSize="@dimen/_12sdp"
-                android:background="@color/white"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:textColorHint="@color/lite_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/EditTextStyle"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -169,14 +162,7 @@
                 app:layout_constraintEnd_toStartOf="@id/imagePasswordVisible"
                 android:hint="@string/password"
                 android:textSize="@dimen/_12sdp"
-                android:background="@color/white"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                android:textColorHint="@color/lite_text"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/EditTextStyle"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -221,23 +207,21 @@
             android:id="@+id/textResetPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgotten password?"
-            android:textColor="@color/primary"
+            android:text="@string/forgotten_password"
+            style="@style/textColorPrimary"
             android:layout_gravity="end"
             android:textSize="@dimen/_12sdp"
-            android:background="@color/white"
             android:textColorHint="@color/lite_text"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_5sdp"
             />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonLogIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log in"
-            android:background="@drawable/background_login_signup_color"
+            android:text="@string/log_in"
+            style="@style/primaryColorButton"
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:textSize="@dimen/_12sdp"

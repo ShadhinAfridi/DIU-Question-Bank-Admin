@@ -1,6 +1,7 @@
 package com.fourdevs.diuquestionbnakadmin.utilities;
 
 public class Constants {
+    public static final String KEY_DB = "diuQbDatabase";
     public static final String KEY_COLLECTION_QUESTIONS = "questions";
     public static final String KEY_DEPARTMENT = "department";
     public static final String KEY_COURSE_CODE = "courseCode";
@@ -26,6 +27,7 @@ public class Constants {
     public static final String KEY_IS_VERIFIED = "isVerified";
     public static final String KEY_FCM_TOKEN = "fcmToken";
     public static final String KEY_AVAILABILITY  = "availability";
+    public static final String KEY_UPLOAD_DATE= "uploadDate";
 
     //contact
     public static final String KEY_COLLECTION_CONTACTS = "contacts";
@@ -38,8 +40,13 @@ public class Constants {
     public static final String KEY_COLLECTION_NOTIFICATIONS = "notifications";
 
     //counts
+    //counts
     public static final String KEY_UPLOAD_COUNT = "upload_count";
     public static final String KEY_APPROVE_COUNT = "approve_count";
     public static final String KEY_REJECT_COUNT = "reject_count";
+
+    //Rewards
+    public static final String KEY_COLLECTION_REWARD = "rewards";
+    public static final String KEY_REWARD_POINTS = "rewardPoints";
 
 }

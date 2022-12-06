@@ -3,62 +3,95 @@ package com.fourdevs.diuquestionbnakadmin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.lifecycle.ViewModelProvider;
+
+import com.fourdevs.diuquestionbnakadmin.adapter.CourseDiff;
 import com.fourdevs.diuquestionbnakadmin.adapter.DepartmentAdapter;
 import com.fourdevs.diuquestionbnakadmin.databinding.ActivityDepartmentBinding;
 import com.fourdevs.diuquestionbnakadmin.listeners.DepartmentListener;
-import com.fourdevs.diuquestionbnakadmin.utilities.Constants;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.fourdevs.diuquestionbnakadmin.models.Course;
+import com.fourdevs.diuquestionbnakadmin.utilities.AsyncTasks;
+import com.fourdevs.diuquestionbnakadmin.viewModel.CourseViewModel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DepartmentActivity extends BaseActivity implements DepartmentListener {
+public class DepartmentActivity extends BaseActivity implements DepartmentListener{
     private ActivityDepartmentBinding binding;
+    private CourseViewModel courseViewModel;
+    private DepartmentAdapter departmentAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDepartmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.departmentProgressBar.setVisibility(View.VISIBLE);
-        getDepartments();
+        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+
+        callNetwork();
         setListeners();
+        setAdapters();
+        getData();
+    }
+
+    private void callNetwork() {
+        binding.departmentProgressBar.setVisibility(View.VISIBLE);
+
+        new AsyncTasks() {
+            @Override
+            public void doInBackground() {
+                courseViewModel.networkCourse();
+            }
+
+            @Override
+            public void onPostExecute() {
+
+            }
+        }.execute();
+    }
+
+    private void getData() {
+        courseViewModel.getAllCourse().observe(this, it->{
+            Course course;
+            List <String> departments = new ArrayList<>();
+            List<Course> courses = new ArrayList<>();
+
+            for(int i=0; i<it.size(); i++) {
+                course = it.get(i);
+                departments.add(course.departmentName);
+            }
+            Set<String> setDepartments = new HashSet<>(departments);
+            departments.clear();
+            departments.addAll(setDepartments);
+            Collections.sort(departments);
+
+            if(it.size()>0) {
+                binding.departmentProgressBar.setVisibility(View.GONE);
+            }
+
+            for(int i=0; i<departments.size(); i++) {
+                Course courseNew = new Course();
+                courseNew.departmentName = departments.get(i);
+                courses.add(courseNew);
+            }
+            departmentAdapter.submitList(courses);
+        });
+
+    }
+
+    private void setAdapters() {
+        departmentAdapter = new DepartmentAdapter(new CourseDiff(), this);
+        binding.departmentRecyclerView.setAdapter(departmentAdapter);
     }
 
     private void setListeners() {
         binding.iconBack.setOnClickListener(view -> onBackPressed());
     }
 
-    private void getDepartments() {
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_QUESTIONS)
-                .whereEqualTo(Constants.KEY_IS_APPROVED, true)
-                .get()
-                .addOnCompleteListener(task -> {
-                    List <String> departments = new ArrayList<>();
-
-                    for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        String departmentName;
-                        departmentName = queryDocumentSnapshot.getString(Constants.KEY_DEPARTMENT);
-                        departments.add(departmentName);
-                    }
-                    Set<String> setDepartments = new HashSet<>(departments);
-                    departments.clear();
-                    departments.addAll(setDepartments);
-                    Collections.sort(departments);
-
-                    if(departments.size() > 0) {
-                        DepartmentAdapter departmentAdapter = new DepartmentAdapter(departments, this);
-                        binding.departmentRecyclerView.setAdapter(departmentAdapter);
-                        binding.departmentRecyclerView.setVisibility(View.VISIBLE);
-                    } else {
-                        binding.linearLayout.setVisibility(View.VISIBLE);
-                    }
-                    binding.departmentProgressBar.setVisibility(View.GONE);
-                });
-    }
 
 
     @Override

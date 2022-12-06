@@ -1,5 +1,7 @@
 package com.fourdevs.diuquestionbnakadmin.adapter;
 
+import android.annotation.SuppressLint;
+import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -8,12 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fourdevs.diuquestionbnakadmin.databinding.ItemContainerHelpBinding;
 import com.fourdevs.diuquestionbnakadmin.models.Help;
 import com.fourdevs.diuquestionbnakadmin.models.User;
+import com.fourdevs.diuquestionbnakadmin.repository.SharedRepository;
 import com.fourdevs.diuquestionbnakadmin.utilities.Constants;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -22,11 +29,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.HelpViewHolder>{
-    private final List<Help> helps;
+public class HelpAdapter extends ListAdapter<Help, HelpAdapter.HelpViewHolder> {
+    private final Application application;
+    private final LifecycleOwner owner;
 
-    public HelpAdapter(List<Help> helps) {
-        this.helps = helps;
+    public HelpAdapter(
+            @NonNull DiffUtil.ItemCallback<Help> diffCallback,
+                       Application application,
+            LifecycleOwner owner
+    ) {
+        super(diffCallback);
+        this.application = application;
+        this.owner = owner;
     }
 
     @NonNull
@@ -42,12 +56,8 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.HelpViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull HelpAdapter.HelpViewHolder holder, int position) {
-        holder.setHelpData(helps.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return helps.size();
+        Help current = getItem(position);
+        holder.setHelpData(current.getHelp());
     }
 
     class HelpViewHolder extends RecyclerView.ViewHolder {
@@ -65,25 +75,40 @@ public class HelpAdapter extends RecyclerView.Adapter<HelpAdapter.HelpViewHolder
         }
 
         private void getUserData(String userId) {
-            FirebaseFirestore database = FirebaseFirestore.getInstance();
-            database.collection(Constants.KEY_COLLECTION_USERS)
-                    .whereEqualTo(Constants.KEY_USER_ID, userId)
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                            binding.userName.setText(queryDocumentSnapshot.getString(Constants.KEY_NAME));
-                            String picture = queryDocumentSnapshot.getString(Constants.KEY_PROFILE_PICTURE);
-                            if(picture!=null){
-                                binding.userPicture.setImageBitmap(getBitmapFromEncodedString(picture));
-                            }
-                        }
-                    });
+            SharedRepository sharedRepository = new SharedRepository(application);
+
+            sharedRepository.getUserData(userId).observe(owner, it->{
+                if(it!=null) {
+                    binding.userName.setText(it.userName);
+                    if(it.profilePicture!=null){
+                        binding.userPicture.setImageBitmap(getBitmapFromEncodedString(it.profilePicture));
+                    }
+                } else {
+                    sharedRepository.getOnlineUserData();
+                }
+
+            });
+
         }
     }
 
     private Bitmap getBitmapFromEncodedString(String encodedImage) {
         byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    public static class HelpDiff extends DiffUtil.ItemCallback<Help> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull Help oldItem, @NonNull Help newItem) {
+            return oldItem == newItem;
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        @Override
+        public boolean areContentsTheSame(@NonNull Help oldItem, @NonNull Help newItem) {
+            return oldItem.getHelp().equals(newItem.getHelp());
+        }
     }
 
 }

@@ -52,7 +52,6 @@ public class PdfAdapter extends RecyclerView.Adapter<PdfAdapter.ViewHolder>{
 
         public void setPdfImage(Bitmap bitmap) {
             binding.pdfview.setImageBitmap(bitmap);
-
         }
 
     }

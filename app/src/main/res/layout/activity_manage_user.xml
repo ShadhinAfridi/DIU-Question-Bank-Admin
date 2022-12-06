@@ -48,9 +48,10 @@
             app:layout_constraintTop_toTopOf="@id/iconBack"
             />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -68,28 +69,18 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_10sdp"
             >
+
+
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profileImageBg"
+                android:id="@+id/profileImage"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_80sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                android:background="@color/primary"
-                />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profileImage"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                app:layout_constraintStart_toStartOf="@id/profileImageBg"
-                app:layout_constraintEnd_toEndOf="@id/profileImageBg"
-                app:layout_constraintTop_toTopOf="@id/profileImageBg"
-                app:layout_constraintBottom_toBottomOf="@id/profileImageBg"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 android:scaleType="centerCrop"
-                android:background="@drawable/background_image"
+                android:background="@android:color/transparent"
                 android:src="@drawable/ic_person"
                 android:padding="@dimen/_2sdp"
                 />
@@ -107,9 +98,8 @@
                 android:paddingEnd="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_14sdp"
-                android:textColor="@color/primary_text"
+                style="@style/textColorPrimaryBlack"
                 android:textStyle="bold"
-                android:background="@color/white"
                 />
 
             <TextView
@@ -123,7 +113,6 @@
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/secondary_text"
                 android:textStyle="bold"
-                android:background="@color/white"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -152,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/primary_text"
+                        style="@style/textColorPrimaryBlack"
                         android:layout_marginBottom="@dimen/_5sdp"
                         />
                     <TextView
@@ -177,15 +166,15 @@
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"
                     >
+
                     <TextView
                         android:id="@+id/approvedCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/primary_text"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        />
+                        style="@style/textColorPrimaryBlack"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
                     <TextView
                         android:id="@+id/textTitleApproved"
                         android:layout_width="wrap_content"
@@ -214,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/primary_text"
+                        style="@style/textColorPrimaryBlack"
                         android:layout_marginBottom="@dimen/_5sdp"
                         />
                     <TextView
@@ -233,9 +222,11 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -251,44 +242,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="4"
             android:padding="5dp"
             >
-
-
-
             <TextView
                 android:id="@+id/verificationText"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="3"
                 android:textStyle="bold"
                 android:padding="@dimen/_5sdp"
                 android:textAlignment="center"
                 android:textSize="@dimen/_10ssp"
                 />
-
-            <Button
-                android:id="@+id/buttonVerify"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_weight="1"
-                android:textAllCaps="false"
-                android:textSize="@dimen/_8sdp"
-                android:textStyle="bold"
-                style="@style/TextAppearance.AppCompat.Button"
-                android:textColor="@color/white"
-                android:text="@string/send"
-                android:backgroundTint="@color/green"
-                android:visibility="gone"
-                />
-
         </LinearLayout>
-
-
-
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/progressBar"

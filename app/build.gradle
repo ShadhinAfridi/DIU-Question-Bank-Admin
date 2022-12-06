@@ -38,13 +38,16 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-database:20.1.0'
-    implementation 'com.google.firebase:firebase-firestore:24.4.0'
+    implementation 'com.google.firebase:firebase-firestore:24.4.1'
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
     implementation 'com.google.firebase:firebase-storage:20.1.0'
-    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
     implementation 'androidx.databinding:databinding-runtime:7.3.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+
 
     //Scalable Size Unit (Support for different  screen sizes)
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
@@ -62,4 +65,10 @@ dependencies {
     def rxJavaVersion = "3.0.0"
     implementation "io.reactivex.rxjava3:rxjava:${rxJavaVersion}"
     implementation "io.reactivex.rxjava3:rxandroid:${rxJavaVersion}"
+
+    def roomVersion = '2.4.3'
+    implementation "androidx.room:room-runtime:$roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
 }

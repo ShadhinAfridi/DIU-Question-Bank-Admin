@@ -3,6 +3,7 @@ package com.fourdevs.diuquestionbnakadmin;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fourdevs.diuquestionbnakadmin.adapter.HelpAdapter;
@@ -12,6 +13,7 @@ import com.fourdevs.diuquestionbnakadmin.models.Help;
 import com.fourdevs.diuquestionbnakadmin.models.User;
 import com.fourdevs.diuquestionbnakadmin.utilities.Constants;
 import com.fourdevs.diuquestionbnakadmin.utilities.PreferenceManager;
+import com.fourdevs.diuquestionbnakadmin.viewModel.SharedViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -27,12 +29,15 @@ import java.util.Objects;
 
 public class HelpActivity extends BaseActivity {
     private ActivityHelpBinding binding;
+    private SharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHelpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+        sharedViewModel.getHelpsDataFromNetwork();
         getUserData();
         setListeners();
     }
@@ -43,37 +48,22 @@ public class HelpActivity extends BaseActivity {
 
     private void getUserData() {
         loading(true);
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_CONTACTS)
-                .get()
-                .addOnCompleteListener(task -> {
-                    List<Help> helps = new ArrayList<>();
-                    for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        Help help = new Help();
-                        help.userId = queryDocumentSnapshot.getString(Constants.KEY_USER_ID);
-                        help.message = queryDocumentSnapshot.getString(Constants.KEY_MESSAGE);
-                        help.subject = queryDocumentSnapshot.getString(Constants.KEY_SUBJECT);
-                        help.dateTime = getReadableDateTime(queryDocumentSnapshot.getDate(Constants.KEY_TIMESTAMP));
-                        help.dateObject = queryDocumentSnapshot.getDate(Constants.KEY_TIMESTAMP);
-                        helps.add(help);
-                    }
-                    helps.sort(Comparator.comparing(obj -> obj.dateObject));
-                    Collections.reverse(helps);
-                    if (helps.size() > 0) {
-                        HelpAdapter helpAdapter = new HelpAdapter(helps);
-                        binding.helpRecyclerView.setAdapter(helpAdapter);
-                        binding.helpRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-                        binding.helpRecyclerView.setVisibility(View.VISIBLE);
-                    } else {
-                        binding.helpEmpty.setVisibility(View.VISIBLE);
-                    }
-                    loading(false);
-                });
+        HelpAdapter helpAdapter = new HelpAdapter(new HelpAdapter.HelpDiff(), getApplication(), this);
+        binding.helpRecyclerView.setAdapter(helpAdapter);
+        binding.helpRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.helpRecyclerView.setVisibility(View.VISIBLE);
+        binding.helpEmpty.setVisibility(View.INVISIBLE);
+
+        sharedViewModel.getHelpData().observe(this, it->{
+            helpAdapter.submitList(it);
+
+            if (it.size() == 0) {
+                binding.helpEmpty.setVisibility(View.VISIBLE);
+            }
+            loading(false);
+        });
     }
 
-    private String getReadableDateTime(Date date) {
-        return new SimpleDateFormat("MMMM dd, yyyy- hh:mm a", Locale.getDefault()).format(date);
-    }
 
     private void loading(Boolean isLoading){
         if(isLoading){

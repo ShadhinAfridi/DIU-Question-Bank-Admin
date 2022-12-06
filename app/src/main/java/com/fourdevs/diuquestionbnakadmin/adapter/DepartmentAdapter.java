@@ -4,26 +4,28 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fourdevs.diuquestionbnakadmin.databinding.ItemContainerDepartmentBinding;
 import com.fourdevs.diuquestionbnakadmin.listeners.DepartmentListener;
+import com.fourdevs.diuquestionbnakadmin.models.Course;
 
-import java.util.List;
+public class DepartmentAdapter extends ListAdapter<Course, DepartmentAdapter.DepartmentViewHolder> {
 
-public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.DepartmentViewHolder> {
-
-    private final List<String> departments;
     private final DepartmentListener departmentListener;
 
-    public DepartmentAdapter(List<String> departments, DepartmentListener departmentListener) {
-        this.departments = departments;
+    public DepartmentAdapter(@NonNull DiffUtil.ItemCallback<Course> diffCallback,
+                             DepartmentListener departmentListener)
+    {
+        super(diffCallback);
         this.departmentListener = departmentListener;
     }
 
     @NonNull
     @Override
-    public DepartmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DepartmentAdapter.DepartmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemContainerDepartmentBinding itemContainerDepartmentBinding = ItemContainerDepartmentBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
@@ -33,14 +35,11 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.De
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DepartmentViewHolder holder, int position) {
-        holder.setDepartmentData(departments.get(position));
+    public void onBindViewHolder(@NonNull DepartmentAdapter.DepartmentViewHolder holder, int position) {
+        Course current = getItem(position);
+        holder.setDepartmentData(current.getCourse());
     }
 
-    @Override
-    public int getItemCount() {
-        return departments.size();
-    }
 
 
     class DepartmentViewHolder extends RecyclerView.ViewHolder{
@@ -51,9 +50,9 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.De
             binding = itemContainerDepartmentBinding;
         }
 
-        void setDepartmentData(String department){
-            binding.textDepartment.setText(department);
-            binding.getRoot().setOnClickListener(view -> departmentListener.onDepartmentClicked(department));
+        void setDepartmentData(Course course){
+            binding.textDepartment.setText(course.departmentName);
+            binding.getRoot().setOnClickListener(view -> departmentListener.onDepartmentClicked(course.departmentName));
         }
     }
 }

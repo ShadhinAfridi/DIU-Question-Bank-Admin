@@ -31,7 +31,6 @@
             app:tint="@color/white"
             />
 
-
         <TextView
             android:id="@+id/textCourseName"
             android:layout_width="0dp"
@@ -97,7 +96,7 @@
         android:padding="@dimen/_5sdp"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout1"
         tools:layout_editor_absoluteX="0dp"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:visibility="gone"
         >
 

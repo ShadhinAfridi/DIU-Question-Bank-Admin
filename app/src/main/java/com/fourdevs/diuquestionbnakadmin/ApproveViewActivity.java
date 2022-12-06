@@ -6,14 +6,18 @@ import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.fourdevs.diuquestionbnakadmin.adapter.PdfAdapter;
 import com.fourdevs.diuquestionbnakadmin.databinding.ActivityPdfViewerBinding;
 import com.fourdevs.diuquestionbnakadmin.utilities.Constants;
+import com.fourdevs.diuquestionbnakadmin.viewModel.CourseViewModel;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,21 +33,19 @@ import java.util.List;
 public class ApproveViewActivity extends AppCompatActivity {
 
     private ActivityPdfViewerBinding binding;
-    private String courseLink;
-    private ParcelFileDescriptor fileDescriptor;
-    private PdfRenderer pdfRenderer;
     private Boolean approved;
     private String userId, questionId, rejectCount, approveCount;
-    private FirebaseFirestore database;
     private DocumentReference userReference, questionReference;
-    private FirebaseStorage storage;
-    private StorageReference storageRef;
+    private CourseViewModel courseViewModel;
+    private String courseLink;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPdfViewerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         loading(true);
         getIntentExtra();
         checkApproveInfo();
@@ -64,7 +66,7 @@ public class ApproveViewActivity extends AppCompatActivity {
     private void checkApproveInfo() {
         if(!approved) {
             binding.constraintLayout2.setVisibility(View.VISIBLE);
-            database = FirebaseFirestore.getInstance();
+            FirebaseFirestore database = FirebaseFirestore.getInstance();
             questionReference = database.collection(Constants.KEY_COLLECTION_QUESTIONS).document(questionId);
             userReference = database
                     .collection(Constants.KEY_COLLECTION_USERS).document(userId);
@@ -80,10 +82,11 @@ public class ApproveViewActivity extends AppCompatActivity {
         binding.buttonReject.setOnClickListener(view -> alertDialogReject());
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void downloadActivity(){
-        storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-        StorageReference pdfRef = storageRef.child(courseLink);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference islandRef = storageRef.child(courseLink);
         File rootPath = new File(getBaseContext().getCacheDir().getPath()+"/Download");
         if(!rootPath.exists()) {
             rootPath.mkdirs();
@@ -93,11 +96,23 @@ public class ApproveViewActivity extends AppCompatActivity {
             loading(false);
             displayPdf(localFile);
         } else {
-            pdfRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+            islandRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 loading(false);
                 displayPdf(localFile);
-            }).addOnFailureListener(exception -> makeToast("file not created" + exception));
+            }).addOnFailureListener(exception ->{
+                Log.d("file not created", exception.getMessage());
+                makeToast("Cannot open this file");
+            } );
         }
+    }
+
+    private void displayPdf(File file){
+        courseViewModel.getListForDisplayPdf(file).observe(this, it->{
+            PdfAdapter pdfAdapter = new PdfAdapter(it);
+            binding.pdfRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            binding.pdfRecyclerView.setAdapter(pdfAdapter);
+            loading(false);
+        });
     }
 
     private void getUploadCount() {
@@ -107,44 +122,6 @@ public class ApproveViewActivity extends AppCompatActivity {
         });
     }
 
-
-    private void displayPdf(File file) {
-        try {
-            fileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
-        } catch (FileNotFoundException e) {
-            makeToast(e.getMessage());
-        }
-
-        try {
-            pdfRenderer = new PdfRenderer(fileDescriptor);
-
-        } catch (IOException e) {
-            makeToast(e.getMessage());
-        }
-
-        int numberOfPage = pdfRenderer.getPageCount();
-        List<Bitmap> list = new ArrayList<>();
-
-        for(int i=0; i<numberOfPage; i++){
-            PdfRenderer.Page rendererPage = pdfRenderer.openPage(i);
-            int rendererPageWidth = rendererPage.getWidth()*2;
-            int rendererPageHeight = rendererPage.getHeight()*2;
-            Bitmap bitmap = Bitmap.createBitmap(
-                    rendererPageWidth,
-                    rendererPageHeight,
-                    Bitmap.Config.ARGB_8888);
-            rendererPage.render(bitmap, null, null,
-                    PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
-            list.add(bitmap);
-            rendererPage.close();
-        }
-        if(list.size() > 0){
-            PdfAdapter pdfAdapter = new PdfAdapter(list);
-            binding.pdfRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            binding.pdfRecyclerView.setAdapter(pdfAdapter);
-        }
-        pdfRenderer.close();
-    }
 
     private void alertDialogApprove() {
         AlertDialog.Builder builderApprove= new AlertDialog.Builder(this);
@@ -221,7 +198,7 @@ public class ApproveViewActivity extends AppCompatActivity {
     }
 
     private void deletePdfData() {
-        storageRef.delete();
+        //storageRef.delete();
     }
 
     private void loading(Boolean isLoading){

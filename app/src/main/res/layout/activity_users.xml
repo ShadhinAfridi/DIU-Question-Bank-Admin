@@ -31,23 +31,38 @@
             />
 
         <TextView
-            android:id="@+id/titleNotice"
+            android:id="@+id/titleUsers"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
             android:ellipsize="end"
             android:gravity="start"
             android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            android:text="Users"
+            android:text="@string/users"
             app:layout_constraintBottom_toBottomOf="@id/iconBack"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iconBack"
             app:layout_constraintTop_toTopOf="@id/iconBack"
             />
+        <TextView
+            android:id="@+id/titleCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iconBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/titleUsers"
+            app:layout_constraintTop_toTopOf="@id/iconBack"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,7 +82,6 @@
             android:orientation="vertical"
             android:overScrollMode="never"
             android:padding="@dimen/_10sdp"
-            android:visibility="gone"
             />
 
         <ProgressBar

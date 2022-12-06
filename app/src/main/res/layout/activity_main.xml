@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:configChanges="uiMode"
     tools:context=".MainActivity">
 
 
@@ -18,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:clipToPadding="false"
         android:padding="@dimen/_5sdp"
-        android:background="@color/primary"
+        android:background="?android:attr/colorPrimary"
         >
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -35,6 +36,7 @@
             android:scaleType="centerCrop"
             android:background="@drawable/background_image"
             android:src="@drawable/ic_person"
+            android:padding="@dimen/_1sdp"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -60,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/userEmail"
@@ -131,7 +133,7 @@
         android:layout_marginTop="-80dp"
         >
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardQuestion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -139,7 +141,6 @@
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardElevation="@dimen/_2sdp"
-
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -158,7 +159,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/textQuestion"
                     android:background="@drawable/background_round_shape"
-                    android:tint="@color/primary"
+                    android:tint="?android:attr/colorPrimary"
                     />
 
                 <TextView
@@ -173,13 +174,14 @@
                     app:layout_constraintTop_toBottomOf="@id/imageQuestion"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textSize="@dimen/_10sdp"
+                    android:textColor="?android:attr/textColorPrimary"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardUpload"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -220,12 +222,13 @@
                     app:layout_constraintTop_toBottomOf="@id/imageUpload"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textSize="@dimen/_10sdp"
+                    android:textColor="?android:attr/textColorPrimary"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardNotice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -266,10 +269,11 @@
                     app:layout_constraintTop_toBottomOf="@id/imageNotice"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textSize="@dimen/_10sdp"
+                    android:textColor="?android:attr/textColorPrimary"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
     <LinearLayout
@@ -285,7 +289,7 @@
         android:gravity="center_horizontal"
         >
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardUser"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -318,7 +322,7 @@
                     android:id="@+id/textUsers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Users"
+                    android:text="@string/users"
                     android:padding="@dimen/_5sdp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -326,11 +330,12 @@
                     app:layout_constraintTop_toBottomOf="@id/imageUsers"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textSize="@dimen/_10sdp"
+                    android:textColor="?android:attr/textColorPrimary"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardApprove"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -363,7 +368,7 @@
                     android:id="@+id/textTitleApprove"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Approve"
+                    android:text="@string/approve"
                     android:padding="@dimen/_5sdp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -371,11 +376,12 @@
                     app:layout_constraintTop_toBottomOf="@id/imageApprove"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textSize="@dimen/_10sdp"
+                    android:textColor="?android:attr/textColorPrimary"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardHelp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -416,10 +422,11 @@
                     app:layout_constraintTop_toBottomOf="@id/imageHelp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textSize="@dimen/_10sdp"
+                    android:textColor="?android:attr/textColorPrimary"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

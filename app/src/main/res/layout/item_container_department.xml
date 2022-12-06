@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="@dimen/_5sdp"
+    style="@style/textColorPrimaryBlack"
     >
 
     <LinearLayout
@@ -74,7 +75,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textDepartmentOf"
-                android:textColor="@color/primary_text"
+                style="@style/textColorPrimaryBlack"
                 android:textSize="@dimen/_12ssp"
                 android:padding="@dimen/_2sdp"
                 android:layout_marginStart="@dimen/_5sdp"
@@ -113,4 +114,4 @@
 
 
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

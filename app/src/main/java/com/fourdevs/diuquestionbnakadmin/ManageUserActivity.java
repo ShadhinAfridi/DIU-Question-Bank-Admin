@@ -7,24 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import com.fourdevs.diuquestionbnakadmin.databinding.ActivityManageUserBinding;
-import com.fourdevs.diuquestionbnakadmin.models.User;
 import com.fourdevs.diuquestionbnakadmin.utilities.Constants;
-import com.fourdevs.diuquestionbnakadmin.utilities.PreferenceManager;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.Objects;
+import com.google.firebase.auth.FirebaseAuthException;
 
 public class ManageUserActivity extends AppCompatActivity {
     private ActivityManageUserBinding binding;
@@ -33,21 +22,23 @@ public class ManageUserActivity extends AppCompatActivity {
     private String uploadCount, rejectCount, approveCount, fcmToken;
     private Integer availability;
     private Boolean isVerified, isAdmin;
+    private FirebaseAuth auth;
 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityManageUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        getUserData();
+        try {
+            getUserData();
+        } catch (FirebaseAuthException e) {
+            e.printStackTrace();
+        }
         setListeners();
-
-
-
     }
 
-    private void getUserData() {
+    private void getUserData() throws FirebaseAuthException {
         Intent intent = getIntent();
         userId = intent.getStringExtra(Constants.KEY_USER_ID);
         userName = intent.getStringExtra(Constants.KEY_NAME);
@@ -60,6 +51,9 @@ public class ManageUserActivity extends AppCompatActivity {
         availability = intent.getIntExtra(Constants.KEY_AVAILABILITY, 0);
         isAdmin = intent.getBooleanExtra(Constants.KEY_IS_ADMIN, false);
         isVerified = intent.getBooleanExtra(Constants.KEY_IS_VERIFIED, false);
+
+        auth = FirebaseAuth.getInstance();
+
         setUserData();
     }
 
@@ -73,18 +67,13 @@ public class ManageUserActivity extends AppCompatActivity {
         binding.uploadCount.setText(uploadCount);
         binding.approvedCount.setText(approveCount);
         binding.rejectedCount.setText(rejectCount);
+        binding.titleProfile.setText(userId);
 
         if(isVerified) {
             binding.verificationText.setText("This user is verified.");
         } else {
-            binding.buttonVerify.setVisibility(View.VISIBLE);
-            binding.buttonVerify.setOnClickListener(view -> sendVerificationEmail());
             binding.verificationText.setText("Not verified! Send verification email.");
         }
-        if(availability==1) {
-            binding.profileImageBg.setBackgroundTintList(ColorStateList.valueOf(R.color.green));
-        }
-
 
     }
 
@@ -97,28 +86,5 @@ public class ManageUserActivity extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
-    private void sendVerificationEmail() {
-        loading(true);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.sendPasswordResetEmail(userEmail)
-                .addOnSuccessListener(task -> {
-                    loading(false);
-                    binding.buttonVerify.setClickable(false);
-                }).addOnFailureListener(e -> {
-                    makeToast(e.getMessage());
-                });
-    }
-
-    private void loading(Boolean isLoading){
-        if(isLoading){
-            binding.progressBar.setVisibility(View.VISIBLE);
-        }else{
-            binding.progressBar.setVisibility(View.GONE);
-        }
-    }
-
-    private void makeToast(String message){
-        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
-    }
 
 }

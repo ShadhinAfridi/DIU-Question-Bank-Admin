@@ -92,4 +92,19 @@
     <string name="uploads">Uploads</string>
     <string name="not_available">Not available&#8230;</string>
     <string name="see_more">See more&#8230;</string>
+    <string name="users">Users</string>
+    <string name="last_login_date">Last Login Date :</string>
+    <string name="online">Online</string>
+    <string name="admin">Admin</string>
+    <string name="approve_questions">Approve Questions</string>
+    <string name="course_code_ex_cse_111">Course Code (Ex: CSE-111)</string>
+    <string name="approve">Approve</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="pending">Pending</string>
+    <string name="cancel">Cancel</string>
+    <string name="_0">0</string>
+    <string name="date">Date :</string>
+    <string name="name_">Name :</string>
+    <string name="info">Info</string>
+    <string name="reject">Reject</string>
 </resources>

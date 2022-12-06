@@ -4,22 +4,25 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.fourdevs.diuquestionbnakadmin.R;
 import com.fourdevs.diuquestionbnakadmin.databinding.ItemContainerUserBinding;
 import com.fourdevs.diuquestionbnakadmin.listeners.UsersListener;
 import com.fourdevs.diuquestionbnakadmin.models.User;
 
-import java.util.List;
+public class UsersAdapter extends ListAdapter<User, UsersAdapter.UsersViewHolder> {
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHolder>{
-
-    private final List<User> users;
     private final UsersListener usersListener;
 
-    public UsersAdapter(List<User> users, UsersListener usersListener) {
-        this.users = users;
+    public UsersAdapter(@NonNull DiffUtil.ItemCallback<User> diffCallback,
+                        UsersListener usersListener)
+    {
+        super(diffCallback);
         this.usersListener = usersListener;
     }
 
@@ -36,13 +39,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
 
     @Override
     public void onBindViewHolder(@NonNull UsersAdapter.UsersViewHolder holder, int position) {
-        holder.setUserData(users.get(position));
+        User user = getItem(position);
+        holder.setUserData(user.getUser());
     }
 
-    @Override
-    public int getItemCount() {
-        return users.size();
-    }
 
     class UsersViewHolder extends RecyclerView.ViewHolder{
         ItemContainerUserBinding binding;
@@ -54,20 +54,32 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
 
         @SuppressLint({"SetTextI18n", "ResourceAsColor"})
         void setUserData(User user){
-            binding.userName.setText(user.name);
+            binding.userName.setText(user.userName);
             binding.userEmail.setText(user.email);
 
             if(user.availability == 0){
                 binding.userAvailable.setText("Offline");
-                binding.userAvailable.setTextColor(R.color.primary);
             }
             if(user.availability == 2){
                 binding.userAvailable.setText("Not Verified");
-                binding.userAvailable.setTextColor(Color.RED);
             }
             binding.getRoot().setOnClickListener(view -> usersListener.onUserClicked(user));
         }
 
+    }
+
+    public static class UserDiff extends DiffUtil.ItemCallback<User> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
+            return oldItem == newItem;
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        @Override
+        public boolean areContentsTheSame(@NonNull User oldItem, @NonNull User newItem) {
+            return oldItem.getUser().equals(newItem.getUser());
+        }
     }
 
 
