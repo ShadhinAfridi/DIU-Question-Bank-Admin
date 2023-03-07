@@ -48,21 +48,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/userPicture"
             app:layout_constraintTop_toBottomOf="@id/userName"
-            app:layout_constraintBottom_toTopOf="@id/userAvailable"
             android:layout_marginStart="@dimen/_5sdp"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/_8sdp"
-            />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/userAvailable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/online"
-            app:layout_constraintStart_toEndOf="@id/userPicture"
-            app:layout_constraintTop_toBottomOf="@id/userEmail"
-            app:layout_constraintBottom_toBottomOf="@id/userPicture"
-            android:layout_marginStart="@dimen/_5sdp"
-            style="@style/textColorPrimaryBlack"
             android:textSize="@dimen/_8sdp"
             />
 

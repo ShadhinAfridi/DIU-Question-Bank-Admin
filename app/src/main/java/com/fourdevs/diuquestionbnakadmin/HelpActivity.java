@@ -1,8 +1,11 @@
 package com.fourdevs.diuquestionbnakadmin;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -14,8 +17,11 @@ import com.fourdevs.diuquestionbnakadmin.models.User;
 import com.fourdevs.diuquestionbnakadmin.utilities.Constants;
 import com.fourdevs.diuquestionbnakadmin.utilities.PreferenceManager;
 import com.fourdevs.diuquestionbnakadmin.viewModel.SharedViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +44,7 @@ public class HelpActivity extends BaseActivity {
         setContentView(binding.getRoot());
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
         sharedViewModel.getHelpsDataFromNetwork();
+
         getUserData();
         setListeners();
     }
@@ -56,8 +63,10 @@ public class HelpActivity extends BaseActivity {
 
         sharedViewModel.getHelpData().observe(this, it->{
             helpAdapter.submitList(it);
-
-            if (it.size() == 0) {
+            binding.titleCount.setText(String.valueOf(it.size()));
+            if (it.size() > 0) {
+                binding.helpEmpty.setVisibility(View.GONE);
+            } else {
                 binding.helpEmpty.setVisibility(View.VISIBLE);
             }
             loading(false);

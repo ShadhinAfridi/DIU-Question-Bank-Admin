@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/_1sdp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/_1sdp"
+    app:cardBackgroundColor="@color/white"
     >
 
     <com.jsibbold.zoomage.ZoomageView
@@ -20,8 +22,7 @@
         app:zoomage_maxScale="8"
         android:adjustViewBounds="true"
         android:padding="@dimen/_5sdp"
-        android:background="@color/white"
         />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

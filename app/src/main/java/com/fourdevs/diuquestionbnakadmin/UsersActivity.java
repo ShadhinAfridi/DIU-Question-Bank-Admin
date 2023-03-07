@@ -37,6 +37,7 @@ public class UsersActivity extends BaseActivity implements UsersListener {
         binding.usersRecyclerView.setAdapter(usersAdapter);
         sharedViewModel.getAllUserData().observe(this, it->{
             usersAdapter.submitList(it);
+            binding.titleCount.setText(String.valueOf(it.size()));
             if(it.size()>0) {
                 loading(false);
             }

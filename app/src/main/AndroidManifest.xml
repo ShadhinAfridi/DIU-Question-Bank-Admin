@@ -53,9 +53,6 @@
             android:name=".authentication.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".PdfViewerActivity"
-            android:exported="false" />
-        <activity
             android:name=".DepartmentActivity"
             android:exported="false" />
         <activity

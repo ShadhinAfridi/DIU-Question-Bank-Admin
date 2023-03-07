@@ -99,7 +99,7 @@
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 android:text="@string/approved"
-                android:visibility="invisible"
+                android:visibility="gone"
                 />
 
             <TextView
@@ -115,7 +115,7 @@
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 android:text="@string/pending"
-                android:visibility="invisible"
+                android:visibility="gone"
                 />
 
             <TextView
@@ -130,7 +130,7 @@
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 android:text="@string/rejected"
-                android:visibility="invisible"
+                android:visibility="gone"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

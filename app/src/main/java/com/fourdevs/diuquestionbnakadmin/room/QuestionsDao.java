@@ -27,10 +27,13 @@ public interface QuestionsDao {
     @Query("DELETE FROM "+ Constants.KEY_COLLECTION_QUESTIONS)
     void DeleteAllCourse();
 
+    @Query("DELETE FROM "+ Constants.KEY_COLLECTION_QUESTIONS +" where courseId = :questionId")
+    void DeleteCourse(String questionId);
+
     @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS +" where departmentName = :department and approved == 1 order by courseName")
     LiveData<List<Course>> getCourses(String department);
 
-    @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS +" where approved == 0 order by dateTime")
+    @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS +" where approved == 0 order by dateTime DESC")
     LiveData<List<Course>> getCoursesForApprove();
 
     @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS+" where approved == 1 order by courseName")
@@ -42,6 +45,10 @@ public interface QuestionsDao {
     @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS
             +" where departmentName = :department and approved == 1 and courseName Like '%' || :courseCode || '%' order by courseName")
     LiveData<List<Course>> getSearchedCourses(String department, String courseCode);
+
+    @Query("SELECT * FROM "+ Constants.KEY_COLLECTION_QUESTIONS
+            +" where departmentName = :department and approved == 1 and fileUrl Like '%' || :courseLink || '%' order by courseName")
+    LiveData<List<Course>> getDuplicateCourses(String department, String courseLink);
 }
 
 

@@ -17,8 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,12 +31,9 @@ public class CourseRepository {
 
     private final QuestionsDao questionsDao;
     private final LiveData<List<Course>> allCourses;
-    private StorageReference pdfRef;
     private final DisplayMetrics metrics;
     private ParcelFileDescriptor fileDescriptor;
     private PdfRenderer pdfRenderer;
-    private MutableLiveData<File> fileName;
-
 
     public CourseRepository(Application application) {
         AppDatabase database = AppDatabase.getDatabase(application);
@@ -75,7 +70,7 @@ public class CourseRepository {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_QUESTIONS)
                 .get()
-                .addOnCompleteListener(this::getDataInsert);
+                .addOnCompleteListener(this::getDataUpdate);
     }
 
     public void networkUserCourse(String userId) {
@@ -86,10 +81,20 @@ public class CourseRepository {
                 .addOnCompleteListener(this::getDataUpdate);
     }
 
-    private void getDataInsert(Task<QuerySnapshot> task) {
-        for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-            this.insert(arrangeData(queryDocumentSnapshot));
-        }
+    public void networkUserCourseApprove() {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_QUESTIONS)
+                .whereEqualTo(Constants.KEY_IS_APPROVED, false)
+                .get()
+                .addOnCompleteListener(this::getDataUpdate);
+    }
+
+    public void networkCourseInfo(String course) {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_QUESTIONS)
+                .whereEqualTo(Constants.KEY_COURSE_ID, course)
+                .get()
+                .addOnCompleteListener(this::getDataUpdate);
     }
 
     private void getDataUpdate(Task<QuerySnapshot> task) {
@@ -113,6 +118,10 @@ public class CourseRepository {
         course.dateTime = getReadableDateTime(queryDocumentSnapshot.getDate(Constants.KEY_TIMESTAMP));
         course.approved = queryDocumentSnapshot.getBoolean(Constants.KEY_IS_APPROVED);
         return course;
+    }
+
+    public LiveData<List<Course>> getDuplicateCourses(String department, String courseLink) {
+        return questionsDao.getDuplicateCourses(department, courseLink);
     }
 
 
@@ -149,6 +158,10 @@ public class CourseRepository {
         }
         pdfRenderer.close();
         return new MutableLiveData<>(list);
+    }
+
+    public void deleteQuestion(String questionId) {
+        AppDatabase.databaseWriteExecutor.execute(() -> questionsDao.DeleteCourse(questionId));
     }
 
 }

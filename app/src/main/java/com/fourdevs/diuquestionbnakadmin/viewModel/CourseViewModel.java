@@ -25,6 +25,16 @@ public class CourseViewModel extends AndroidViewModel {
 
     }
 
+    public void networkUserCourseApprove() {
+        repository.networkUserCourseApprove();
+    }
+
+    public void update(Course course) {
+        repository.update(course);
+    }
+
+    public void networkCourseInfo(String course) {repository.networkCourseInfo(course);}
+
     public LiveData<List<Course>> getAllCourse() {
         return allCourse;
     }
@@ -45,8 +55,16 @@ public class CourseViewModel extends AndroidViewModel {
         repository.networkCourse();
     }
 
-    public MutableLiveData<List<Bitmap>> getListForDisplayPdf(File file) {
+    public LiveData<List<Bitmap>> getListForDisplayPdf(File file) {
         return repository.getListForDisplayPdf(file);
+    }
+
+    public LiveData<List<Course>> getDuplicateCourses(String department, String courseLink) {
+        return repository.getDuplicateCourses(department, courseLink);
+    }
+
+    public void deleteQuestion(String questionId) {
+        repository.deleteQuestion(questionId);
     }
 
 }

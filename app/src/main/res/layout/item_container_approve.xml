@@ -67,5 +67,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             />
 
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/courseCode"
+            app:layout_constraintTop_toBottomOf="@id/department"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/_9ssp"
+            />
+
+        <TextView
+            android:id="@+id/dateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/department"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/_9ssp"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

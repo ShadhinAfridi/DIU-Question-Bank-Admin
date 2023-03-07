@@ -84,7 +84,7 @@ public class HelpAdapter extends ListAdapter<Help, HelpAdapter.HelpViewHolder> {
                         binding.userPicture.setImageBitmap(getBitmapFromEncodedString(it.profilePicture));
                     }
                 } else {
-                    sharedRepository.getOnlineUserData();
+                    sharedRepository.getOnlineUserData(userId);
                 }
 
             });

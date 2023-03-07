@@ -162,6 +162,7 @@
                 app:layout_constraintEnd_toStartOf="@id/imagePasswordVisible"
                 android:hint="@string/password"
                 android:textSize="@dimen/_12sdp"
+                android:imeOptions="actionDone"
                 style="@style/EditTextStyle"
                 />
 

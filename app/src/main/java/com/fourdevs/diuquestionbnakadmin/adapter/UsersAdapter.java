@@ -1,7 +1,6 @@
 package com.fourdevs.diuquestionbnakadmin.adapter;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fourdevs.diuquestionbnakadmin.R;
 import com.fourdevs.diuquestionbnakadmin.databinding.ItemContainerUserBinding;
 import com.fourdevs.diuquestionbnakadmin.listeners.UsersListener;
 import com.fourdevs.diuquestionbnakadmin.models.User;
@@ -41,6 +39,7 @@ public class UsersAdapter extends ListAdapter<User, UsersAdapter.UsersViewHolder
     public void onBindViewHolder(@NonNull UsersAdapter.UsersViewHolder holder, int position) {
         User user = getItem(position);
         holder.setUserData(user.getUser());
+
     }
 
 
@@ -54,15 +53,13 @@ public class UsersAdapter extends ListAdapter<User, UsersAdapter.UsersViewHolder
 
         @SuppressLint({"SetTextI18n", "ResourceAsColor"})
         void setUserData(User user){
-            binding.userName.setText(user.userName);
-            binding.userEmail.setText(user.email);
+            if(user.userName != null) {
+                binding.userName.setText(user.userName);
+            }
+            if(user.email !=null) {
+                binding.userEmail.setText(user.email);
+            }
 
-            if(user.availability == 0){
-                binding.userAvailable.setText("Offline");
-            }
-            if(user.availability == 2){
-                binding.userAvailable.setText("Not Verified");
-            }
             binding.getRoot().setOnClickListener(view -> usersListener.onUserClicked(user));
         }
 

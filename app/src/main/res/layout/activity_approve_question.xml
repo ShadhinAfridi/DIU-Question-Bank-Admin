@@ -78,6 +78,7 @@
         app:layout_constraintTop_toBottomOf="@id/constraintLayout1"
         app:layout_constraintBottom_toBottomOf="parent"
         >
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/courseRecyclerView"
             android:layout_width="match_parent"
@@ -86,7 +87,8 @@
             android:orientation="vertical"
             android:overScrollMode="never"
             android:padding="@dimen/_2sdp"
-            />
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
         <ProgressBar
             android:id="@+id/progressBar"

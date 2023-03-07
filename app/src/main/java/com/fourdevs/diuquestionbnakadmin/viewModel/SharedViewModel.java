@@ -23,6 +23,10 @@ public class SharedViewModel extends AndroidViewModel {
         sharedRepository.getOnlineUserData();
     }
 
+    public void getOnlineUserData(String userId) {
+        sharedRepository.getOnlineUserData(userId);
+    }
+
     public LiveData<User> getUserData(String userId) {
         return sharedRepository.getUserData(userId);
     }

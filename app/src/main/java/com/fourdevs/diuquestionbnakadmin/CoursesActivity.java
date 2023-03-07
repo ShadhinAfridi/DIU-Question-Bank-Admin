@@ -98,11 +98,8 @@ public class CoursesActivity extends BaseActivity implements CourseListener {
 
     @Override
     public void onCourseClicked(Course course) {
-        Intent intent = new Intent(getApplicationContext(), PdfViewerActivity.class);
-        intent.putExtra(Constants.KEY_NAME, course.courseName + " " + course.semester + "(" + course.year + ")");
-        intent.putExtra(Constants.KEY_PDF_URL, course.fileUrl);
-        intent.putExtra(Constants.KEY_UPLOAD_DATE, course.dateTime);
-        intent.putExtra(Constants.KEY_USER_ID, course.userId);
+        Intent intent = new Intent(getApplicationContext(), ApproveViewActivity.class);
+        intent.putExtra(Constants.KEY_NAME, course);
         startActivity(intent);
     }
 }

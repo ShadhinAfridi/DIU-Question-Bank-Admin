@@ -7,17 +7,18 @@ import androidx.room.PrimaryKey;
 import com.fourdevs.diuquestionbnakadmin.utilities.Constants;
 
 import java.io.Serializable;
-import java.util.Date;
+
 @Entity(tableName = Constants.KEY_COLLECTION_CONTACTS)
 public class Help implements Serializable {
 
     public String subject;
     public String message;
     public String dateTime;
+    public String userId;
 
     @PrimaryKey
     @NonNull
-    public String userId = null;
+    public String id = null;
 
     public Help() {
 
@@ -29,8 +30,8 @@ public class Help implements Serializable {
         help.message = this.message;
         help.dateTime = this.dateTime;
         help.userId = this.userId;
+        help.id = this.id;
         return help;
     }
-
 
 }

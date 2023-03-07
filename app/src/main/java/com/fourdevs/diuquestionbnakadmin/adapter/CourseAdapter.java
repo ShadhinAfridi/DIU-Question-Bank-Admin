@@ -2,25 +2,18 @@ package com.fourdevs.diuquestionbnakadmin.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fourdevs.diuquestionbnakadmin.PdfViewerActivity;
-import com.fourdevs.diuquestionbnakadmin.R;
 import com.fourdevs.diuquestionbnakadmin.databinding.ItemContainerCoursesBinding;
 import com.fourdevs.diuquestionbnakadmin.listeners.CourseListener;
 import com.fourdevs.diuquestionbnakadmin.models.Course;
-import com.fourdevs.diuquestionbnakadmin.utilities.Constants;
 
 public class CourseAdapter extends ListAdapter<Course, CourseAdapter.CourseViewHolder> {
 
@@ -68,39 +61,16 @@ public class CourseAdapter extends ListAdapter<Course, CourseAdapter.CourseViewH
             binding.semesterName.setText(course.semester+"("+course.year+")");
             binding.examName.setText(course.exam);
             binding.iconDownload.setOnClickListener(view -> {
-                makeToast("Download not available.");
-            });
-            binding.iconEye.setOnClickListener(view -> {
-                goToPdfViewer(course.courseName, course.fileUrl, course.semester, course.year);
-                binding.iconEye.setColorFilter(ContextCompat.getColor(context, R.color.primary),
-                        PorterDuff.Mode.SRC_ATOP);
-                resetColor();
+                makeToast();
             });
 
             binding.getRoot().setOnClickListener(view -> courseListener.onCourseClicked(course));
         }
-
-        private void goToPdfViewer(String courseName, String fileUrl, String semester, String year) {
-            Intent intent = new Intent(context, PdfViewerActivity.class);
-            intent.putExtra(Constants.KEY_NAME, courseName+" "+semester+"("+year+")");
-            intent.putExtra(Constants.KEY_PDF_URL, fileUrl);
-            context.startActivity(intent);
-        }
-
-        public void resetColor(){
-            new Handler().postDelayed(() -> {
-                binding.iconEye.setColorFilter(ContextCompat.getColor(context, R.color.secondary_text),
-                        PorterDuff.Mode.SRC_ATOP);
-            }, 1000);
-        }
-
-
-
     }
 
 
-    private void makeToast(String value) {
-        Toast.makeText(context,value,Toast.LENGTH_SHORT).show();
+    private void makeToast() {
+        Toast.makeText(context, "Download not available.",Toast.LENGTH_SHORT).show();
     }
 
 }

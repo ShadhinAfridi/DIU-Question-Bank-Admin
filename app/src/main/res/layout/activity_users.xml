@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:ellipsize="end"
-            android:gravity="start"
+            android:gravity="center"
             android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
@@ -45,10 +45,11 @@
             app:layout_constraintBottom_toBottomOf="@id/iconBack"
             app:layout_constraintStart_toEndOf="@id/iconBack"
             app:layout_constraintTop_toTopOf="@id/iconBack"
+            app:layout_constraintEnd_toStartOf="@id/titleCount"
             />
         <TextView
             android:id="@+id/titleCount"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_5sdp"
@@ -59,7 +60,6 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/iconBack"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/titleUsers"
             app:layout_constraintTop_toTopOf="@id/iconBack"
             />
 

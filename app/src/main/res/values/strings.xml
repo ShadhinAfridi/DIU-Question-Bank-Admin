@@ -48,7 +48,7 @@
     </string-array>
 
     <string name="courses">Courses</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="nothing_n_found">Nothing \n Found</string>
     <string name="ops">Ops!</string>
     <string name="help">Help</string>
@@ -107,4 +107,15 @@
     <string name="name_">Name :</string>
     <string name="info">Info</string>
     <string name="reject">Reject</string>
+    <string name="todo">TODO</string>
+    <string name="edit_question_button">Edit Question Button</string>
+    <string name="copy_not_found">Copy Not Found</string>
+    <string name="delete_document_only">Delete Document Only.</string>
+    <string name="delete_all">Delete document and pdf both.</string>
+    <string name="type_confirm">Type Confirm.</string>
+    <string name="confirm">Confirm</string>
+    <string name="copy_file_available">Copy File Available</string>
+    <string name="email_1">Email :</string>
+    <string name="rename">Rename</string>
+    <string name="rename_course_code">Rename Course Code</string>
 </resources>

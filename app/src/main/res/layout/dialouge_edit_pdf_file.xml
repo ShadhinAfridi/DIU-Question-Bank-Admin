@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/buttonDeleteDocument"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_document_only"
+            android:padding="@dimen/_5sdp"
+            android:textColor="?android:attr/textColorPrimary"
+            />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/buttonDeleteAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_all"
+            android:padding="@dimen/_5sdp"
+            android:textColor="?android:attr/textColorPrimary"
+            />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/buttonRejectFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reject"
+            android:padding="@dimen/_5sdp"
+            android:textColor="?android:attr/textColorPrimary"
+            />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/buttonRenameCourseCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rename_course_code"
+            android:padding="@dimen/_5sdp"
+            android:textColor="?android:attr/textColorPrimary"
+            />
+
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/courseCodeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@android:color/transparent"
+        android:background="@android:color/transparent"
+        android:hint="@string/course_code"
+        android:visibility="gone"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/courseCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="@dimen/_12ssp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@android:color/transparent"
+        android:background="@android:color/transparent"
+        android:hint="@string/type_confirm"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="@dimen/_12ssp"
+            android:imeOptions="actionDone"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -14,6 +14,7 @@ public class Constants {
     public static final String KEY_IS_REJECTED= "isRejected";
     public static final String KEY_READ_ONCE= "readOnce";
     public static final String KEY_COUNT_ONCE= "countOnce";
+    public static final String KEY_COURSE_ID= "courseId";
 
     //authentication
     public static final String KEY_COLLECTION_USERS = "users";
@@ -28,6 +29,7 @@ public class Constants {
     public static final String KEY_FCM_TOKEN = "fcmToken";
     public static final String KEY_AVAILABILITY  = "availability";
     public static final String KEY_UPLOAD_DATE= "uploadDate";
+    public static final String KEY_REJECT_REASON= "rejectReason";
 
     //contact
     public static final String KEY_COLLECTION_CONTACTS = "contacts";

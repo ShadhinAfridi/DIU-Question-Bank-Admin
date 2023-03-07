@@ -55,15 +55,15 @@ public class UpdateAdapter extends ListAdapter<Course,UpdateAdapter.CourseViewHo
             if(course.approved != null) {
                 if(course.approved) {
                     binding.statusApproved.setVisibility(View.VISIBLE);
-                    binding.statusPending.setVisibility(View.INVISIBLE);
+                    binding.statusPending.setVisibility(View.GONE);
                 } else {
                     binding.statusPending.setVisibility(View.VISIBLE);
-                    binding.statusApproved.setVisibility(View.INVISIBLE);
+                    binding.statusApproved.setVisibility(View.GONE);
                 }
-                binding.statusRejected.setVisibility(View.INVISIBLE);
+                binding.statusRejected.setVisibility(View.GONE);
             } else {
-                binding.statusApproved.setVisibility(View.INVISIBLE);
-                binding.statusPending.setVisibility(View.INVISIBLE);
+                binding.statusApproved.setVisibility(View.GONE);
+                binding.statusPending.setVisibility(View.GONE);
                 binding.statusRejected.setVisibility(View.VISIBLE);
             }
             binding.uploadDate.setText(course.dateTime);
